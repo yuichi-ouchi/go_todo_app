@@ -1,5 +1,5 @@
 name: golang-ci
-on: 
+on:
   pull_request:
     paths:
       - "**.go"
@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code into the Go module directory
-      uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: golangci-lint
-      uses: reviewdog/action-golangci-lint@v2
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        golangci_lint_flags: "--config=./.golangci.yml ./..."
-        fail_on_error: true
-        reporter: "github-pr-review"
+        uses: reviewdog/action-golangci-lint@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          golangci_lint_flags: "--config=./.golangci.yml ./..."
+          fail_on_error: true
+          reporter: "github-pr-review"
