@@ -7,6 +7,9 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/yuichi-ouchi/go_todo_app/config"
 	"golang.org/x/sync/errgroup"
@@ -20,6 +23,10 @@ func main() {
 }
 
 func run(ctx context.Context) error {
+	// for Graceful Shutdown
+	// if process kill signal or server shutdown signal is received.
+	ctx, stop := signal.NotifyContext(ctx, syscall.SIGTERM, os.Kill, os.Interrupt)
+	defer stop()
 
 	// 環境変数から設定を取得
 	cfg, err := config.New()
@@ -39,6 +46,8 @@ func run(ctx context.Context) error {
 	// 引数でnet.Litnerを受け取る（addr フィールドは使わない）
 	s := &http.Server{
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			//! For test command Interrupt signal.
+			time.Sleep(5 * time.Second)
 			fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
 		}),
 	}
