@@ -22,3 +22,26 @@ main関数で HTTP サーバを起動すると、戻り値が検証できませ�
 * ポート番号が固定されていると、サーバーの起動に失敗する可能性がある
 
 上記を踏まえて、run 関数を用意しました。
+
+## 動作検証
+
+### タスク一覧の取得
+
+curl コマンドによる動作検証例
+
+```cmd
+#curl -i -XPOST localhost:80/tasks -d @.\handler\testdata\add_task\ok_req.json.golden 
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 16 Aug 2024 17:49:30 GMT
+Content-Length: 8
+
+{"id":4}
+#curl -i -XPOST localhost:80/tasks -d @.\handler\testdata\add_task\bad_req.json.golden 
+HTTP/1.1 400 Bad Request
+Content-Type: application/json; charset=utf-8
+Date: Fri, 16 Aug 2024 17:49:57 GMT
+Content-Length: 90
+
+{"message":"Key: 'Title' Error:Field validation for 'Title' failed on the 'required' tag"}
+```
