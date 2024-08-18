@@ -7,6 +7,12 @@ import (
 type Config struct {
 	Env  string `env:"TODO_ENV" envDefault:"dev"`
 	Port int    `env:"PORT" envDefault:"80"`
+
+	DBHost     string `env:"TODO_DB_HOST" envDefault:"192.168.0.20"`
+	DBPort     int    `env:"TODO_DB_PORT" envDefault:"3306"`
+	DBName     string `env:"TODO_DB_NAME" envDefault:"todo"`
+	DBUser     string `env:"TODO_DB_USER" envDefault:"todo"`
+	DBPassword string `env:"TODO_DB_PASSWORD" envDefault:"todo"`
 }
 
 func New() (*Config, error) {

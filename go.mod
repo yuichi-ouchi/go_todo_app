@@ -7,6 +7,7 @@ require (
 	github.com/go-chi/chi/v5 v5.1.0
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/google/go-cmp v0.6.0
+	github.com/jmoiron/sqlx v1.4.0
 	golang.org/x/sync v0.1.0
 )
 
