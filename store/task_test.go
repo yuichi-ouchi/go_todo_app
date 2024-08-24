@@ -61,7 +61,7 @@ func prepareTasks(ctx context.Context, t *testing.T, con Execer) entity.Tasks {
 			Modified: c.Now(),
 		},
 	}
-	//!todo check result
+
 	result, err := con.ExecContext(ctx,
 		`INSERT INTO task (title, status, created, modified) VALUES (?, ?, ?, ?), (?, ?, ?, ?), (?, ?, ?, ?);`,
 		wants[0].Title, wants[0].Status, wants[0].Created, wants[0].Modified,
@@ -102,7 +102,7 @@ func TestRepository_AddTask(t *testing.T) {
 	t.Cleanup(func() { _ = db.Close() })
 	mock.ExpectExec(
 		// エスケープが必要
-		`INSERT INTO task \( title, status, created, modified\) VALUES \(\?, \?, \?, \?\)`,
+		`INSERT INTO task\(title, status, created, modified\) VALUES\(\?, \?, \?, \?\)`,
 	).WithArgs(okTask.Title, okTask.Status, okTask.Created, okTask.Modified).
 		WillReturnResult(sqlmock.NewResult(wantID, 1))
 
