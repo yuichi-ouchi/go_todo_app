@@ -3,12 +3,22 @@ package store
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/yuichi-ouchi/go_todo_app/clock"
 	"github.com/yuichi-ouchi/go_todo_app/config"
+)
+
+const (
+	// ErrCodeMySQLDuplicateEntry MySQL系 エラーコード
+	ErrCodeMySQLDuplicateEntry = 1062
+)
+
+var (
+	ErrAlreadyEntry = errors.New("duplicate entry")
 )
 
 type Beginner interface {
