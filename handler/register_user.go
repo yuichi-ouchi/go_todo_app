@@ -27,7 +27,7 @@ func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := ru.Validator.Struct(b); err != nil {
-		RespondJSON(ctx, w, ErrResponse{
+		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),
 		}, http.StatusBadRequest)
 		return
@@ -35,12 +35,11 @@ func (ru *RegisterUser) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	u, err := ru.Service.RegisterUser(ctx, b.Name, b.Password, b.Role)
 	if err != nil {
-		RespondJSON(ctx, w, ErrResponse{
+		RespondJSON(ctx, w, &ErrResponse{
 			Message: err.Error(),
 		}, http.StatusInternalServerError)
 		return
 	}
-
 	rsp := struct {
 		ID entity.UserID `json:"id"`
 	}{ID: u.ID}

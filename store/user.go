@@ -14,7 +14,7 @@ func (r *Repository) RegisterUser(ctx context.Context, db Execer, u *entity.User
 	u.Modified = r.Clocker.Now()
 	sql := `INSERT INTO user (
 		name, password, role, created, modified
-		) VALUES (?, ?, ?, ?)`
+	) VALUES (?, ?, ?, ?, ?)`
 	result, err := db.ExecContext(ctx, sql, u.Name, u.Password, u.Role, u.Created, u.Modified)
 	if err != nil {
 		var mysqlErr *mysql.MySQLError
