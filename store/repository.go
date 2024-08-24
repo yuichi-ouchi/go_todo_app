@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/yuichi-ouchi/go_todo_app/clock"
 	"github.com/yuichi-ouchi/go_todo_app/config"
 )
 
@@ -58,4 +59,8 @@ func New(ctx context.Context, cfg *config.Config) (*sqlx.DB, func(), error) {
 
 	xdb := sqlx.NewDb(db, "mysql")
 	return xdb, func() { _ = db.Close() }, nil
+}
+
+type Repository struct {
+	Clocker clock.Clocker
 }
