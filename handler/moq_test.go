@@ -19,8 +19,8 @@ var _ ListTasksService = &ListTasksServiceMock{}
 //
 //		// make and configure a mocked ListTasksService
 //		mockedListTasksService := &ListTasksServiceMock{
-//			ListTaskFunc: func(ctx context.Context) (entity.Tasks, error) {
-//				panic("mock out the ListTask method")
+//			ListTasksFunc: func(ctx context.Context) (entity.Tasks, error) {
+//				panic("mock out the ListTasks method")
 //			},
 //		}
 //
@@ -29,49 +29,49 @@ var _ ListTasksService = &ListTasksServiceMock{}
 //
 //	}
 type ListTasksServiceMock struct {
-	// ListTaskFunc mocks the ListTask method.
-	ListTaskFunc func(ctx context.Context) (entity.Tasks, error)
+	// ListTasksFunc mocks the ListTasks method.
+	ListTasksFunc func(ctx context.Context) (entity.Tasks, error)
 
 	// calls tracks calls to the methods.
 	calls struct {
-		// ListTask holds details about calls to the ListTask method.
-		ListTask []struct {
+		// ListTasks holds details about calls to the ListTasks method.
+		ListTasks []struct {
 			// Ctx is the ctx argument value.
 			Ctx context.Context
 		}
 	}
-	lockListTask sync.RWMutex
+	lockListTasks sync.RWMutex
 }
 
-// ListTask calls ListTaskFunc.
-func (mock *ListTasksServiceMock) ListTask(ctx context.Context) (entity.Tasks, error) {
-	if mock.ListTaskFunc == nil {
-		panic("ListTasksServiceMock.ListTaskFunc: method is nil but ListTasksService.ListTask was just called")
+// ListTasks calls ListTasksFunc.
+func (mock *ListTasksServiceMock) ListTasks(ctx context.Context) (entity.Tasks, error) {
+	if mock.ListTasksFunc == nil {
+		panic("ListTasksServiceMock.ListTasksFunc: method is nil but ListTasksService.ListTasks was just called")
 	}
 	callInfo := struct {
 		Ctx context.Context
 	}{
 		Ctx: ctx,
 	}
-	mock.lockListTask.Lock()
-	mock.calls.ListTask = append(mock.calls.ListTask, callInfo)
-	mock.lockListTask.Unlock()
-	return mock.ListTaskFunc(ctx)
+	mock.lockListTasks.Lock()
+	mock.calls.ListTasks = append(mock.calls.ListTasks, callInfo)
+	mock.lockListTasks.Unlock()
+	return mock.ListTasksFunc(ctx)
 }
 
-// ListTaskCalls gets all the calls that were made to ListTask.
+// ListTasksCalls gets all the calls that were made to ListTasks.
 // Check the length with:
 //
-//	len(mockedListTasksService.ListTaskCalls())
-func (mock *ListTasksServiceMock) ListTaskCalls() []struct {
+//	len(mockedListTasksService.ListTasksCalls())
+func (mock *ListTasksServiceMock) ListTasksCalls() []struct {
 	Ctx context.Context
 } {
 	var calls []struct {
 		Ctx context.Context
 	}
-	mock.lockListTask.RLock()
-	calls = mock.calls.ListTask
-	mock.lockListTask.RUnlock()
+	mock.lockListTasks.RLock()
+	calls = mock.calls.ListTasks
+	mock.lockListTasks.RUnlock()
 	return calls
 }
 
