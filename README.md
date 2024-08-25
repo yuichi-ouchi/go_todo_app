@@ -27,21 +27,29 @@ main関数で HTTP サーバを起動すると、戻り値が検証できませ�
 
 ### タスク一覧の取得
 
-curl コマンドによる動作検証例
+*`curl`コマンドによる動作検証例*
 
-```cmd
-#curl -i -XPOST localhost:80/tasks -d @.\handler\testdata\add_task\ok_req.json.golden 
+Windowsのコマンドプロンプトの利用を推奨しない。
+
+[WindowsでcurlコマンドでJSONを送信する](https://qiita.com/Hina_Developer/items/e583021a44a753e29dde)
+
+
+```shell
+$ curl -i -X POST localhost:80/tasks -d @.\handler\testdata\add_task\ok_req.json.golden 
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 Date: Fri, 16 Aug 2024 17:49:30 GMT
 Content-Length: 8
 
 {"id":4}
-#curl -i -XPOST localhost:80/tasks -d @.\handler\testdata\add_task\bad_req.json.golden 
+
+$ curl -i -X POST localhost:80/tasks -d @.\handler\testdata\add_task\bad_req.json.golden 
 HTTP/1.1 400 Bad Request
 Content-Type: application/json; charset=utf-8
 Date: Fri, 16 Aug 2024 17:49:57 GMT
 Content-Length: 90
 
-{"message":"Key: 'Title' Error:Field validation for 'Title' failed on the 'required' tag"}
+$ curl -X POST localhost:80/register -d '{"name": "john2", "password":"test", "role":"user"}'
+
+
 ```
