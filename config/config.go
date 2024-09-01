@@ -14,7 +14,7 @@ type Config struct {
 	DBUser     string `env:"TODO_DB_USER" envDefault:"todo"`
 	DBPassword string `env:"TODO_DB_PASSWORD" envDefault:"todo"`
 	RedisHost  string `env:"TODO_REDIS_HOST" envDefault:"192.168.0.20"`
-	RedisPort  int    `env:"TODO_REDIS_PORT" envDefault:"36379"`
+	RedisPort  int    `env:"TODO_REDIS_PORT" envDefault:"6379"`
 }
 
 func New() (*Config, error) {

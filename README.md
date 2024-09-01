@@ -51,5 +51,5 @@ Content-Length: 90
 
 $ curl -X POST localhost:80/register -d '{"name": "john2", "password":"test", "role":"user"}'
 
-
+$ curl -i -X POST localhost:80/login -d '{"user_name": "budou", "password":"test", "role":"admin"}' |  tail
 ```
