@@ -54,6 +54,9 @@ $ curl -X POST localhost:80/register -d '{"name": "john2", "password":"test", "r
 $ curl -i -X POST localhost:80/login -d '{"user_name": "budou", "password":"test", "role":"admin"}' |  tail
 ```
 ### database migration
+
+DBスキーマ変更管理ツール(sqldef)
+
 ```cmd
-mysqldef.exe -u todo -p todo -h 192.168.0.20 -P 3306 todo < "E:\Dropbox\GoDev\Projects\go_todo_app\_tools\mysql\schema.sql"
+mysqldef.exe -u todo -p todo -h 192.168.0.20 -P 3306 todo < "go_todo_app\_tools\mysql\schema.sql"
 ```
