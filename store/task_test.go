@@ -103,9 +103,9 @@ func prepareTasks(ctx context.Context, t *testing.T, con Execer) (entity.UserID,
 	if err != nil {
 		t.Fatal(t)
 	}
-	wants[0].ID = entity.TaskID(id)
-	wants[1].ID = entity.TaskID(id + 1)
-	wants[2].ID = entity.TaskID(id + 2)
+	tasks[0].ID = entity.TaskID(id)
+	tasks[1].ID = entity.TaskID(id + 1)
+	tasks[2].ID = entity.TaskID(id + 2)
 	return userID, wants
 }
 
