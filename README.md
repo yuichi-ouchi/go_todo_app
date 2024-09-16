@@ -60,3 +60,26 @@ DBスキーマ変更管理ツール(sqldef)
 ```cmd
 mysqldef.exe -u todo -p todo -h 192.168.0.20 -P 3306 todo < "go_todo_app\_tools\mysql\schema.sql"
 ```
+
+## エンドポイント一覧
+
+|HTTP METHOD|PATH|OVERVIEW|
+|---|----|---|
+|POST|/register|新しいユーザーを登録する|
+|POST|/login|登録済みのユーザでアクセストークンを取得|
+|POST|/tasks|アクセストークンからタスクを登録|
+|GET|/tasks|アクセストークンからタスク一覧を取得|
+|GET|/admin|管理者権限でアクセス|
+
+管理者ユーザの登録とログイン
+
+```cmd
+$ curl -X POST localhost:80/register -d '{"name": "admin_user", "password": "test", "role": "admin"}'
+{"id":3}
+
+$ curl -X POST localhost:80/login -d '{"user_name": "admin_user", "password": "test?"}'
+{"message":"wrong password: crypto/bcrypt: hashedPassword is not the hash of the given password"}
+
+$ curl -X POST localhost:80/login -d '{"user_name": "admin_user", "password": "test"}'
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjY0ODA0ODgsImlhdCI6MTcyNjQ3ODY4OCwiaXNzIjoiZ2l0aHViLmNvbS95dWljaGktb3VjaGkvZ29fdG9kb19hcHAiLCJqdGkiOiIyODA3ZGUyNC0xMDAzLTQ3YmUtOTU3NC0xNDZiMTg3ZTQ5MjgiLCJyb2xlIjoiYWRtaW4iLCJ ----} 
+```
